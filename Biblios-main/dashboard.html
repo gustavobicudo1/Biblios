@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblios system - Página Inicial</title>
+</head>
+<body>
+    
+    <div class="page-wrapper">
+
+        <div class="search-top-box">
+            <img src="Pesquisa.png" alt="erro">
+        </div>
+        
+        <div class="main-container">
+
+            <div class="page-header">
+                
+<a href="pagina_login.html" title="Voltar">
+                    <img src="download.png" alt="Voltar" height="20px">
+                </a>
+                
+                <h1 class="page-title">Página Inicial</h1>
+
+                <div class="header-icons">
+                    <a href="emprestimo.html" title="Contatos/Agenda" class="icon-link">
+                        <img src="Captura de tela 2026-10-30 165146.png" alt="Agenda">
+                    </a>
+                    <a href="livros.html" title="Livros" class="icon-link">
+                        <img src="Captura de tela 2026-10-30 165934.png" alt="Livros">
+                    </a>
+                    <a href="configuracoes.html" title="Ajustes/Filtros" class="icon-link">
+                        <img src="Captura de tela 2026-10-30 170041.png" alt="Filtros">
+                    </a>
+                </div>
+            </div>
+
+            <div class="list-container">
+                
+                <div class="list-item">
+                    <div class="item-image-box">
+                        <img src="C:\Users\Aluno\Desktop\e-commerce\imagens\produtoa.jpg" alt="MouthPad">
+                    </div>
+                    <div class="item-info">
+                        <h2>MOUTHPAD</h2>
+                        <p class="details">Produto | Nome | Descrição | Preço | Comprar</p>
+                        <p class="status">STATUS: Disponível</p>
+                        <p class="action">Preço: 23,90R$ <span class="dot-red">O</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #c1ded5;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 900px;
+    gap: 20px; 
+}
+
+.search-top-box {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.search-top-box img {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    display: block;
+}
+
+.main-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    width: 100%;
+    box-sizing: border-box; 
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.icon-link-back:hover {
+    transform: scale(1.1);
+}
+
+.icon-link-back img {
+    height: 22px;
+    width: auto;
+    display: inline-block;
+}
+
+.page-title {
+    color: #000000;
+    font-size: 36px;
+    margin: 0;
+    font-weight: normal;
+    text-align: center;
+    flex-grow: 1;
+}
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+    width: 100px; 
+    justify-content: flex-end;
+}
+
+.icon-link {
+    text-decoration: none;
+    transition: transform 0.1s;
+    display: inline-block;
+}
+.header-icons .icon-link img {
+    width: auto;
+    height: 22px; 
+    display: block;
+}
+
+.list-container {
+    display: flex;
+    gap: 35px;
+    flex-direction: column;
+}
+.list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+}
+
+.item-image-box {
+    width: 130px;
+    height: 130px;
+    border: 1px solid #B0BEC5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.item-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-info {
+    text-align: left;
+}
+
+.item-info h2 {
+    font-size: 24px;
+    margin: 0 0 4px 0;
+    color: #000000;
+    letter-spacing: 0.5px;
+}
+
+.item-info .details {
+    font-size: 18px;
+    color: #555555;
+    margin: 0 0 6px 0;
+}
+
+.item-info .status {
+    font-size: 16px;
+    color: #444444;
+    margin: 0 0 4px 0;
+}
+
+.item-info .action {
+    font-size: 16px;
+    color: #444444;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.dot-red {
+    color: #FF0000;
+    font-size: 14px;
+}
+</style>
+</html>
