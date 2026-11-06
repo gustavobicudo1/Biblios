@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empréstimo</title>
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <style>
+        body {
+            background-color: #c0ded4; 
+            font-family: 'Courier New', Courier, monospace; 
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            margin: 0;
+        }
+
+        .text-teal-custom { color: #5fb09f; }
+        .bg-teal-custom { background-color: #5fb09f; }
+        .border-teal-custom { border-color: #5fb09f; }
+
+        main {
+            width: 100%;
+            max-width: 56rem;
+            background-color: #fff;
+            border-radius: 0.125rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            padding: 2rem;
+            position: relative;
+            flex-grow: 1;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            letter-spacing: 0.05em;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-col { width: 100%; }
+        input[type="text"], input[type="date"] {
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            margin-left: 0.5rem;
+            font-family: inherit;
+        }
+
+        /* Botão Voltar */
+        .btn-back {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .upload-container {
+            width: 100%;
+            aspect-ratio: 3/4;
+            border: 2px solid #5fb09f;
+            border-radius: 0.375rem;
+            margin-bottom: 1rem;
+            background-color: #fff;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .hidden-input { display: none; }
+
+        .upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            border: 2px dashed #d1d5db;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            background-color: #f9fafb;
+            transition: background-color 200ms;
+            box-sizing: border-box;
+        }
+
+        .upload-label:hover { background-color: #f3f4f6; }
+
+
+        .state-initial {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 0.5rem;
+        }
+
+        .state-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .svg-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            margin-bottom: 1rem;
+            fill: none;
+            stroke: currentColor;
+        }
+
+        .circle-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 9999px;
+            background-color: rgba(16, 185, 129, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .hidden-input:valid + .upload-label .state-initial { display: none; }
+        .hidden-input:valid + .upload-label .state-success { display: flex; }
+
+        .meta-data {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.025em;
+            margin-bottom: 1rem;
+        }
+        .meta-data p { margin: 0.5rem 0; }
+
+        .btn-add {
+            background-color: #5fb09f;
+            color: #fff;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 200ms;
+        }
+        .btn-add:hover { opacity: 0.9; }
+
+        .footer-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .btn-action {
+            background-color: #5fb09f;
+            color: #fff;
+            font-weight: 700;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-size: 1.25rem;
+            letter-spacing: 0.05em;
+            transition: opacity 200ms;
+        }
+        .btn-action:hover { opacity: 0.9; }
+
+        .form-fields {
+            display: flex;
+            flex-direction: column;
+            font-size: 1.125rem;
+            gap: 0.75rem;
+        }
+        .form-fields p { margin: 0; }
+        .uppercase { text-transform: uppercase; }
+
+        @media (min-width: 768px) {
+            .flex-container { flex-direction: row; }
+            .info-col { width: 33.333333%; }
+            .form-fields { width: 66.666667%; }
+        }
+    </style>
+</head>
+<body>
+
+    <img src="Pesquisa.png" style="width: 900px; max-width: 100%;" alt="erro">
+
+    <main>
+        <button class="btn-back">
+            <a href="dashboard.html">
+                <img src="download.png" width="20" alt="Voltar">
+            </a>
+        </button>
+
+        <h1>EMPRÉSTIMO</h1>
+        <div class="flex-container">
+            <div class="info-col">
+                <div class="upload-container">
+                    <input id="dropzone-user" type="file" class="hidden-input" accept="image/*" required />
+                    <label for="dropzone-user" class="upload-label">
+                        <div class="state-initial">
+                            <p style="margin: 0 0 0.5rem 0; color: #374151; font-size: 0.875rem;">
+                                <span class="text-teal-custom" style="font-weight: 600;">Clique para enviar</span> a foto
+                            </p>
+                            <p style="margin: 0; color: #6b7280; font-size: 0.75rem;">PNG, JPG ou WEBP</p>
+                        </div>
+                        <div class="state-success">
+                            <div class="circle-icon">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="meta-data">
+                    <p>SITUAÇÃO: </p>
+                    <p>DEVOLVIDO: </p>
+                    <p>ESTADO DO LIVRO: </p>
+                </div>
+
+                <button class="btn-add">
+                    <i class="fas fa-plus"></i> Adicionar
+                </button>
+            </div>
+
+            <div class="form-fields">
+                <p><span class="uppercase">NOME:</span><input type="text" id="Nome" name="Nome"></p>
+                <p><span class="uppercase">IDADE:</span><input type="text" id="Idade" name="Idade"></p>
+                <p><span class="uppercase">TELEFONE:</span><input type="text" id="Telefone" name="Telefone"></p>
+                <p><span class="uppercase">GMAIL:</span><input type="text" id="Gmail" name="Gmail"></p>
+                <p><span class="uppercase">RN:</span><input type="text" id="Rn" name="Rn"></p>
+                <p><span class="uppercase">AGENDAMENTO:</span><input type="date" id="Agendamento" name="Agendamento"></p>
+            </div>
+        </div>
+
+
+        <div class="flex-container">
+            <div class="info-col">
+                <div class="upload-container">
+                    <input id="dropzone-book" type="file" class="hidden-input" accept="image/*" required />
+                    <label for="dropzone-book" class="upload-label">
+                        <div class="state-initial">
+                            <svg class="svg-icon text-teal-custom" xmlns="http://w3.org" viewBox="0 0 20 16">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                            </svg>
+                            <p style="margin: 0 0 0.5rem 0; color: #374151; font-size: 0.875rem;">
+                                <span class="text-teal-custom" style="font-weight: 600;">Clique para enviar</span> a foto
+                            </p>
+                            <p style="margin: 0; color: #6b7280; font-size: 0.75rem;">PNG, JPG ou WEBP</p>
+                        </div>
+                        <div class="state-success">
+                            <div class="circle-icon">
+                            </div>
+                        </div>
+
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-fields" style="padding-top: 1rem;">
+                <p><span class="uppercase">NOME DO LIVRO:</span><input type="text" id="NomeLivro" name="NomeLivro"></p>
+                <p><span class="uppercase">AUTOR:</span><input type="text" id="Autor" name="Autor"></p>
+                <p><span class="uppercase">DESCRIÇÃO:</span><input type="text" id="Descricao" name="Descricao"></p>
+                <p><span class="uppercase">ESTADO:</span><input type="text" id="Estado" name="Estado"></p>
+                <p><span class="uppercase">EDITORA:</span><input type="text" id="Editora" name="Editora"></p>
+                <div style="padding-top:">
+                    <button class="btn-add">
+                        <i class="fas fa-plus"></i> Adicionar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="footer-actions">
+            <button class="btn-action">CANCELAR</button>
+            <button class="btn-action">CONCLUÍDO</button>
+        </div>
+
+    </main>
+
+</body>
+</html>
